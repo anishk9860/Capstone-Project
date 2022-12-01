@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="heading">
+        <h2>Create an account</h2>
+    </div>
+    <div>
+        <form (ngSubmit)="createUser()" #signupForm="ngForm">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="First Name*"
+                name="firstName" ngModel required #fname="ngModel">
+                <p *ngIf="fname.invalid && fname.touched" class="error-message">Please enter your first name!</p>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Last Name*"
+                name="lastName" ngModel required #lname="ngModel">
+                <p *ngIf="lname.invalid && lname.touched" class="error-message">Please enter your last name!</p>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email*"
+                name="email" ngModel required email #email="ngModel">
+                <p *ngIf="email.invalid && email.touched" class="error-message">Please enter a valid email!</p>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password*"
+                name="password" ngModel required #pwd="ngModel">
+                <p *ngIf="pwd.invalid && pwd.touched" class="error-message">Please enter your password!</p>
+            </div>
+            <div class="form-group" *ngIf="isSeller">
+                <input type="text" class="form-control" placeholder="Entity Name*"
+                name="entityName" ngModel required #entity="ngModel">
+                <p *ngIf="pwd.invalid && pwd.touched" class="error-message">Please enter your password!</p>
+            </div>
+            <div class="form-group">
+                <label for="userType"> Are you a merchant: </label>
+                <span *ngFor="let type of userType">
+                    <input type="radio" id="{{type.id}}" value="{{type.value}}" 
+                        name="userType" ngModel #pwd="ngModel" [ngModel]="defaultUserType" 
+                        (ngModelChange)="changeUserType($event, $event)">
+                    <label for="userType">{{type.value}}</label>
+                </span>  
+            </div>
+            <button class="signup-button" type="submit" [disabled]="!signupForm.valid">Sign Up</button>
+        </form>
+    </div>
+    <div class="click-here">
+        Already have an account? <span class="signup-login" routerLink="/login">
+            Click here!</span> to login
+    </div>
+</div>

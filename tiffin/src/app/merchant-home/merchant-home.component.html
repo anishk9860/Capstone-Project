@@ -1,0 +1,48 @@
+<div>
+    <button class="additem-button" (click)="addFoodItem()">Add Item</button>
+</div>
+<!-- <ul>
+    <li *ngFor="let food of foods">
+        <a>
+            <img src="{{food.imageUrl}}" alt="food_images">
+            <div class="content">
+                <div class="name">
+                    {{food.name}}
+                </div>
+                <div class="rating">
+                    {{food.rating}}
+                </div>
+                <div class="product-item-footer">
+                    <div class="tags">
+                        <span *ngFor="let tag of food.tags">
+                            {{tag + " "}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul> -->
+<div *ngIf="foodItems == null">
+    You do not have any items added. Please <strong> click on add</strong> to add items!
+</div>
+<ul>
+    <li *ngFor="let foodItem of foodItems">
+        <a>
+            <!-- <img src="{{foodItem.itemPic}}" alt="food_images"> -->
+            <img [src]=getSanitizeUrl(foodItem.itemPic) alt="food_images" class="image">
+            <div class="content">
+                <div class="name">
+                   {{foodItem.itemName}}
+                </div>
+                <div class="rating">
+                    CAD ${{foodItem.itemCost}}
+                </div>
+                <div>
+                    <button class="edit-button" (click)="editFoodItem(foodItem)">Edit</button>
+                    <button class="delete-button" (click)="deleteFoodItem(foodItem.itemId)">Delete</button>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>

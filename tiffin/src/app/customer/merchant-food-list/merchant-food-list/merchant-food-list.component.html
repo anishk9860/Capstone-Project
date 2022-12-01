@@ -1,0 +1,31 @@
+<div class="top-bar">
+    <div class="left-section">
+        {{merchant.entityName}}
+    </div>
+    <div class="right-section">
+            <button (click)="goToCart()" class="cart-button">Cart<span> ({{cartItemCount}}) </span></button>
+    </div>
+</div>
+
+<ul>
+    <li *ngFor="let foodItem of foodItems">
+        <a>
+            <!-- <img src="{{foodItem.itemPic}}" alt="food_images"> -->
+            <img [src]=getSanitizeUrl(foodItem.itemPic) alt="food_images" class="image">
+            <div class="content">
+                <div class="name">
+                   {{foodItem.itemName}}
+                </div>
+                <div class="rating">
+                    CAD ${{foodItem.itemCost}}
+                </div>
+                <!-- <div>
+                    {{cuisines[(merchant.cuisineId)-1]}}
+                </div> -->
+                <div>
+                    <button class="addToCart-button" (click)="addItemToCart(foodItem)">Add To Cart</button>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>

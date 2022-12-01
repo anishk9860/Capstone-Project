@@ -1,11 +1,148 @@
-.nav-spacer {
-    flex: 1 1 auto;
+.header {
+    height: 55px;
+    background-color: rgb(35, 65, 186);
+    display: flex;
+    flex-direction: right;
+    justify-content: space-between;
+    font-family: Roboto;
 }
 
-.flexExpand {
-    flex: 0.01;
+.left-section {
+    display: flex;
+    align-items: center;
 }
 
-.nav-bar{
-    margin-bottom: 5%;
+.tiffin-logo {
+    color: white;
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.tiffin-logo:hover {
+    cursor: pointer;
+}
+
+.greet {
+    color: white;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.middle-section {
+    flex: 1;
+    margin-left: 70px;
+    margin-right: 35px;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    flex: 1;
+    height: 34px;
+    padding-left: 10px;
+    font-size: 16px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    border-radius: 2px;
+    box-shadow: inset 1px 2px 3px 
+    rgba(0, 0, 0, 0.05);
+    width: 0;
+}
+
+.search-bar::placeholder {
+    font-family: Roboto, Arial;
+    font-size: 16px;
+}
+
+.search-button {
+    height: 38px;
+    width: 60px;
+    background-color: rgb(240, 240, 240);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    margin-left: -1px;
+    margin-right: 10px;
+}
+
+.search-icon {
+    height: 25px;
+    margin-top: 4px;
+}
+
+.search-icon:hover {
+    cursor: pointer;
+}
+
+.right-section {
+    width: 200px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-shrink: 0;
+}
+
+.login-button {
+    height: 30px;
+    width: 60px;
+    background-color: rgb(240, 240, 240);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    margin-left: 30px;
+    margin-right: 10px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.login-button:hover {
+    cursor: pointer;
+}
+
+.login-active {
+    background-color: rgb(48, 111, 183);
+    color: white;
+    border-width: 2px;
+}
+
+.signup-button {
+    height: 30px;
+    background-color: rgb(240, 240, 240);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.signup-button:hover {
+    cursor: pointer;
+}
+
+.signup-active {
+    background-color: rgb(48, 111, 183);
+    color: white;
+    border-width: 2px;
+}
+
+.logout-button {
+    height: 30px;
+    width: 80px;
+    background-color: rgb(240, 240, 240);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    margin-left: 30px;
+    margin-right: 0px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.logout-button:hover {
+    cursor: pointer;
 }

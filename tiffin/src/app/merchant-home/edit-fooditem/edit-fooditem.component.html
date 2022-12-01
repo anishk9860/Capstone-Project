@@ -1,0 +1,55 @@
+<div class="heading">
+    <h2>Hi {{merchantName}},</h2>
+    <div>
+        <h4>Please enter the updated food item details:</h4>
+    </div>
+    
+</div>
+<div class="container-fluid">
+    <div>
+        <form (ngSubmit)="editFoodItem()" #foodItemForm="ngForm">
+
+            <div class="form-group">
+                <label for="itemName">Enter name of the item:</label>
+                <input type="text" id="itemName" class="form-control" 
+                    [(ngModel)]="itemToBeEdited.itemName" 
+                    name="itemName" ngModel required #itemName="ngModel">
+                <p *ngIf="itemName.invalid && itemName.touched" 
+                class="error-message">Please enter the name of your food item
+            </p>
+            </div>
+
+            <div class="form-group">
+                <label for="cost">Enter amount in CAD:</label>
+                <input type="text" id="cost" class="form-control" [(ngModel)]="itemToBeEdited.itemCost"
+                name="itemCost" ngModel required #itemCost="ngModel">
+                <p *ngIf="itemCost.invalid && itemCost.touched" 
+                class="error-message">Please enter the cost of your food item
+            </p>
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="cuisine">Select your type of cuisine:</label>
+                <select class="form-control" id="cuisine" name="cuisineName" ngModel required>
+                    <option *ngFor="let cuisine of cuisines" [value]="cuisine">
+                        {{cuisine}}
+                    </option>
+                  </select>
+            </div> -->
+
+            <div class="form-group">
+                <label for="file">Upload image:</label>
+                <input type="file" id="file" name="image" ngModel accept="image/*" 
+                    (change)="onSelectFile($event)">
+            </div>
+    
+            <button class="add-button" type="submit" [disabled]="!foodItemForm.valid">
+                Save Changes
+            </button>
+            <button class="cancel-button" (click)="cancelClicked()">
+                Cancel
+            </button>
+        </form>
+    </div>
+</div>
+

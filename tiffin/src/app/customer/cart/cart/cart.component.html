@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <div class="heading">
+        <h2>Items in your cart</h2>
+    </div>
+    <table>
+        <tr>
+            <th>Item name</th>
+            <th>Quantity</th>
+            <th>Select Quantity</th>
+            <th>Price</th>
+        </tr>
+
+        <tr class="row" *ngFor="let item of cartItems">
+            <td>{{item.itemName}}</td>
+            <td>{{item.itemCount}}</td>
+            <td>
+                <select [(ngModel)]="selectedQuantity" (change)="quantitySelected(item)">
+                    <!-- <option *ngFor="let quantity of quantities" 
+                    [ngValue]="item">
+                        {{quantity}}
+                    </option> -->
+                    <option value="0" [selected]="item.itemCount === 0 ? 'selected' : null">0</option>
+                    <option value="1" [selected]="item.itemCount === 1 ? 'selected' : null">1</option>
+                    <option value="2" [selected]="item.itemCount === 2 ? 'selected' : null">2</option>
+                    <option value="3" [selected]="item.itemCount === 3 ? 'selected' : null">3</option>
+                    <option value="4" [selected]="item.itemCount === 4 ? 'selected' : null">4</option>
+                </select></td>
+            <td>CAD ${{item.itemCost}}</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total Price</td>
+            <td>CAD ${{totalCost}}</td>
+        </tr>
+        
+    </table>
+    <div>
+        <button class="signin-button">Proceed to Order</button>
+        <button class="signin-button" (click)="goToCustomerHome()">Cancel</button>
+    </div>
+</div>
+

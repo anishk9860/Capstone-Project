@@ -1,0 +1,41 @@
+<div class="heading">
+    <h2>Welcome {{customerName}}</h2>
+    <div>
+        <h4>We just need a few more details to get you started!</h4>
+    </div>
+    
+</div>
+<div class="container-fluid">
+    <div>
+        <form (ngSubmit)="saveLocationDetails(locationForm)" #locationForm="ngForm">
+            <div class="form-group">
+                <label for="city">Select your city:</label>
+                <select class="form-control" id="city" name="cityName" ngModel required>
+                    <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+                  </select>
+            </div>
+            <div>Address Details:</div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Street Name*" 
+                name="streetName" ngModel required #streetAddress="ngModel">
+                <p *ngIf="streetAddress.invalid && streetAddress.touched" 
+                class="error-message">Please enter a your street address
+            </p>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Apt No. (Optional)" 
+                name="aptNo" ngModel #aptNo="ngModel">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter you zipcode*" 
+                name="zipCode" ngModel required #zip="ngModel">
+                <p *ngIf="zip.invalid && zip.touched" class="error-message">
+                    Please enter a your zipcode
+                </p>
+            </div>
+            <button class="signin-button" type="submit" [disabled]="!locationForm.valid">
+                Save
+            </button>
+        </form>
+    </div>
+</div>

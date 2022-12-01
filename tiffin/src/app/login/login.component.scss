@@ -1,0 +1,80 @@
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 200px 100px;
+    height: 500px;
+    background-color: rgb(168, 187, 215);
+    font-family: Roboto;
+}
+
+.heading {
+    width: 300px;
+    height: 60px;
+}
+
+.form-group {
+    width: 300px;
+    height: 35px;
+    margin-bottom: 35px;
+}
+
+.form-control {
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
+    font-size: 16px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    border-radius: 2px;
+    box-shadow: inset 1px 2px 3px 
+    rgba(0, 0, 0, 0.05);
+}
+
+.form-control::placeholder {
+    font-family: Roboto;
+    font-size: 16px;
+}
+
+.signin-button {
+    height: 30px;
+    background-color: rgb(240, 240, 240);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    border-radius: 2px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.signin-button:hover {
+    cursor: pointer;
+}
+
+.signin-button:active {
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+.click-here {
+    width: 300px;
+}
+
+.signup-login {
+    text-decoration: underline;
+}
+
+.signup-login:hover {
+    cursor: pointer;
+}
+
+input.ng-invalid.ng-touched {
+    border: red 2px solid;
+}
+
+.error-message {
+    color: red;
+}
