@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "Hibernate",
+    "type": "java.lang.String",
+    "description": "A description for 'Hibernate'"
+  },
+  {
+    "name": "tiffin.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'tiffin.app.jwtSecret'"
+  },
+  {
+    "name": "tiffin.app.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'tiffin.app.jwtExpirationMs'"
+  },
+  {
+    "name": "tiffin.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'tiffin.app.jwtSecret'"
+  },
+  {
+    "name": "tiffin.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'tiffin.app.jwtSecret'"
+  }
+]}
