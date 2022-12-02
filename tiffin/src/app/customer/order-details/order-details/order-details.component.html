@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <div class="heading">
+        <h2>Order Details:</h2>
+    </div>
+    <table>
+        <tr>
+            <th>Item name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+
+        <tr class="row" *ngFor="let item of cartItems">
+            <td>{{item.itemName}}</td>
+            <td>{{item.itemCount}}</td>
+
+            <td>CAD ${{item.itemCost}}</td>
+        </tr>
+
+        <tr *ngIf="selectedDeliveryChoice === 'Pick Up'">
+            <td></td>
+            <td>Total Price</td>
+            <td>CAD ${{totalCost}}</td>
+        </tr>
+
+        <tr *ngIf="selectedDeliveryChoice === 'Home Delivery'">
+            <td></td>
+            <td>Delivery Charges</td>
+            <td>CAD $5</td>
+        </tr>
+
+        <tr *ngIf="selectedDeliveryChoice === 'Home Delivery'">
+            <td></td>
+            <td>Total Price</td>
+            <td>CAD ${{deliveryCost}}</td>
+        </tr>
+        
+    </table>
+    <div class="heading">
+        <h2>Pick Up or Delivery</h2>
+    </div>
+    <div class="delivery-choice">
+        <div>Please select how would you like to get your tiffin</div>
+        <div>
+            <!-- <select [(ngModel)]="selectedDeliveryChoice" (change)="deliveryChoiceSelected()" required> -->
+            <select (change)="deliveryChoiceSelected($event)" required>
+                <!-- <option *ngFor="let quantity of quantities" 
+                [ngValue]="item">
+                    {{quantity}}
+                </option> -->
+                <option value="Pick Up" selected>Pick Up</option>
+                <option value="Home Delivery">Home Delivery</option>
+                <!-- <option value="2" [selected]="item.itemCount === 2 ? 'selected' : null">2</option> -->
+            </select>
+        </div>
+    </div>
+    <div class="heading">
+        <h2>Date of Pick Up/Delivery</h2>
+    </div>
+    <div class="delivery-date">
+        <p>When would you like to get your tiffin?</p>
+        <p><strong>Note: </strong>You can select a day which is tomorrow or a month from today.</p>
+        <p>You cannot get your tiffin on the same day of ordering!</p>
+        <input type="date" class="calender" [min]="minDate" [max]="maxDate" (change)="dateSelected($event)">
+    </div>
+    <div>
+        <button class="signin-button" (click)="confirmAndPay()">Confirm and Pay</button>
+        <button class="signin-button" (click)="goToCart()">Back To Cart</button>
+        <button class="signin-button" (click)="goToCustomerHome()">Cancel</button>
+    </div>
+</div>

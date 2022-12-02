@@ -2,9 +2,7 @@ package com.tiffin.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,51 +147,10 @@ public class UserController {
 				 signUpRequest.getUserType(), 
 				 signUpRequest.getEntityName());
 
-//		Set<String> strUserTypes = signUpRequest.getUserType();
-//		Set<UserType> userTypes = new HashSet<>();
-//
-//		if (strUserTypes == null) {
-//			UserType userType = userTypeRepository.findByName(EUserType.ROLE_CUSTOMER)
-//					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//			userTypes.add(userType);
-//		} else {
-//			strUserTypes.forEach(userType -> {
-//				switch (userType) {
-//				
-//				case "merchant":
-//					UserType merchant = userTypeRepository.findByName(EUserType.ROLE_MERCHANT)
-//							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//					userTypes.add(merchant);
-//
-//					break;
-//				default:
-//					UserType customer = userTypeRepository.findByName(EUserType.ROLE_CUSTOMER)
-//						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//					userTypes.add(customer);
-//				}
-//			});
-//		}
-//
-//		user.setUserTypes(userTypes);
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
-	
-//	@PostMapping("/login")
-//	public Users loginUser(@RequestBody Users userLoginDetails) {
-//		return userService.authenticate(userLoginDetails);
-//	}
-	
-//	@GetMapping("/login")
-//	public boolean loginUser(@RequestParam String email, @RequestParam String password) {
-//		return userService.authenticate(email, password);
-//	}
-	
-//	@PostMapping("/signup")
-//	public Users addNewUser(@RequestBody Users newUser) {
-//		return userService.save(newUser);
-//	}
 	
 
 }

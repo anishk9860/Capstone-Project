@@ -1,5 +1,7 @@
 package com.tiffin.controller;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tiffin.model.CityLocation;
@@ -16,18 +17,24 @@ import com.tiffin.model.Item;
 import com.tiffin.model.Location;
 import com.tiffin.model.Merchant;
 import com.tiffin.model.OrderItems;
+import com.tiffin.model.TransactionItems;
+import com.tiffin.model.Transactions;
 import com.tiffin.model.UserInformation;
 import com.tiffin.model.Users;
 import com.tiffin.payload.request.AddToCartRequest;
 import com.tiffin.payload.request.MerchantDetailsRequest;
+import com.tiffin.payload.request.PostTransactionRequest;
+import com.tiffin.payload.request.TransactionItem;
 import com.tiffin.payload.response.CustomerLocationResponse;
-import com.tiffin.payload.response.MerchantLocationResponse;
+import com.tiffin.payload.response.MessageResponse;
 import com.tiffin.repository.CityLocationRepository;
 import com.tiffin.repository.CuisineRepository;
 import com.tiffin.repository.ItemRepository;
 import com.tiffin.repository.LocationRepository;
 import com.tiffin.repository.MerchantRepository;
 import com.tiffin.repository.OrderItemsRepository;
+import com.tiffin.repository.TransactionItemsRepository;
+import com.tiffin.repository.TransactionsRepository;
 import com.tiffin.repository.UserInformationRepository;
 import com.tiffin.repository.UserRepository;
 
@@ -59,6 +66,12 @@ public class CustomerController {
 	
 	@Autowired
 	OrderItemsRepository orderItemsRepository;
+	
+	@Autowired
+	TransactionsRepository transactionsRepository;
+	
+	@Autowired
+	TransactionItemsRepository transactionItemsRepository;
 	
 	@PostMapping("/save-customer-location")
 	public ResponseEntity<?> saveCustomerLocation(@RequestBody MerchantDetailsRequest request) {
@@ -147,6 +160,49 @@ public class CustomerController {
 			orderItem.setItemCount(request.getItemCount());
 			orderItemsRepository.save(orderItem);
 		}
+		
+	}
+	
+	@PostMapping("/post-transaction")
+	public void postTransaction(@RequestBody PostTransactionRequest request) {
+		
+		Transactions newTransaction = new Transactions();
+		newTransaction.setCustomerId(request.getCustomerId());
+		newTransaction.setDeliveryDate(request.getDeliveryDate());
+		newTransaction.setDeliveryType(request.getDeliveryType());
+		newTransaction.setMerchantId(request.getMerchantId());
+		newTransaction.setOrderStatusId(7);
+		newTransaction.setTotalCost(request.getTotalCost());
+		newTransaction.setTransactionDate(LocalDate.now());
+		
+		transactionsRepository.save(newTransaction);
+		
+		ArrayList<Transactions> transactionList = transactionsRepository
+				.findAllByMerchantIdAndCustomerIdAndTransactionDate(request.getMerchantId(), 
+						request.getCustomerId(), LocalDate.now());
+		
+		long currentTransactionId;
+		
+		if(transactionList.size() == 1) {
+			currentTransactionId = transactionList.get(0).getTransactionId();
+		} else {
+			long tempId = 0;
+			for(int i=0; i<transactionList.size(); i++) {
+				tempId = Math.max(tempId, transactionList.get(i).getTransactionId());
+			}
+			currentTransactionId = tempId;
+		}
+		
+		ArrayList<TransactionItem> itemsList = request.getTransactionItems();
+		for(int i=0; i<itemsList.size(); i++) {
+			TransactionItems item = new TransactionItems();
+			item.setItemName(itemsList.get(i).getItemName());
+			item.setQuantity(itemsList.get(i).getItemCount());
+			item.setTransactionId(currentTransactionId);
+			transactionItemsRepository.save(item);
+		}
+		
+		ResponseEntity.ok(new MessageResponse("Order Placed successfully!"));
 		
 	}
 	

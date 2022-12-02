@@ -17,6 +17,8 @@ export class CustomerService {
 
   private updateItemsInCartURL = "http://localhost:8080/api/update-items-in-cart";
 
+  private postTransactiontURL = "http://localhost:8080/api/post-transaction";
+
   private httpOptions = {
     headers: new HttpHeaders()
   }
@@ -25,6 +27,11 @@ export class CustomerService {
 
   saveCustomerDetails(customerDetails: Object): Observable<any> {
     return this.httpClient.post<any>(`${this.saveCustomerLocationURL}`, customerDetails, 
+      this.httpOptions);
+  }
+
+  postTransaction(orderDetails: Object): Observable<any> {
+    return this.httpClient.post<any>(`${this.postTransactiontURL}`, orderDetails, 
       this.httpOptions);
   }
 

@@ -15,6 +15,7 @@ import { CustomerHomeComponent } from './customer/customer-home/customer-home/cu
 import { CustomerLocationComponent } from './customer/customer-location/customer-location/customer-location.component';
 import { MerchantFoodListComponent } from './customer/merchant-food-list/merchant-food-list/merchant-food-list.component';
 import { CartComponent } from './customer/cart/cart/cart.component';
+import { OrderDetailsComponent } from './customer/order-details/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CartComponent } from './customer/cart/cart/cart.component';
     CustomerHomeComponent,
     CustomerLocationComponent,
     MerchantFoodListComponent,
-    CartComponent
+    CartComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -56,6 +56,10 @@ export class CartComponent implements OnInit {
       this.router.navigate(['customer-home']);
     }
 
+    goToOrderDetails(){
+      this.router.navigate(['order-details']);
+    }
+
     quantitySelected(item: any){
       console.log(item);
       if(item.itemCount === this.selectedQuantity){

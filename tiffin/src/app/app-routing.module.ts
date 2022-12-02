@@ -4,6 +4,7 @@ import { CartComponent } from './customer/cart/cart/cart.component';
 import { CustomerHomeComponent } from './customer/customer-home/customer-home/customer-home.component';
 import { CustomerLocationComponent } from './customer/customer-location/customer-location/customer-location.component';
 import { MerchantFoodListComponent } from './customer/merchant-food-list/merchant-food-list/merchant-food-list.component';
+import { OrderDetailsComponent } from './customer/order-details/order-details/order-details.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AddFooditemComponent } from './merchant-home/add-fooditem/add-fooditem.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: 'add-fooditem', component: AddFooditemComponent},
   {path: 'edit-fooditem', component: EditFooditemComponent},
   {path: 'merchant-food-list', component: MerchantFoodListComponent},
-  {path: 'customer-cart', component: CartComponent}
+  {path: 'customer-cart', component: CartComponent},
+  {path: 'order-details', component: OrderDetailsComponent}
 ];
 
 @NgModule({
@@ -34,4 +36,4 @@ export class AppRoutingModule { }
 export const routingComponents = [HomeComponent, LoginComponent, SignupComponent, 
   MerchantComponent, MerchantHomeComponent, AddFooditemComponent, 
   EditFooditemComponent, CustomerLocationComponent, CustomerHomeComponent, 
-  MerchantFoodListComponent, CartComponent]
+  MerchantFoodListComponent, CartComponent, OrderDetailsComponent]
