@@ -39,23 +39,9 @@ public class Users {
 	@Column(name = "entity_name")
 	private String entityName;
 	
-//	@ManyToMany(fetch = FetchType.LAZY)
-//	@JoinTable(name = "user_information", 
-//				joinColumns = @JoinColumn(name = "user_id"), 
-//				inverseJoinColumns = @JoinColumn(name = "user_type_id"))
-//	private String userType = "";	
-	
 	public Users() {
 		super();
 	}
-		
-//	public Users(String email, String firstName, String lastName, String password) {
-//		super();
-//		this.email = email;
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		this.password = password; 
-//	}
 	
 	public Users(String email, String firstName, String lastName, String password, LocalDate accountCreationDate, 
 			int userTypeId) {

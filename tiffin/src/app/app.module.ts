@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { authInterceptorProviders } from './_interceptor/auth-interceptor';
@@ -16,12 +15,24 @@ import { CustomerLocationComponent } from './customer/customer-location/customer
 import { MerchantFoodListComponent } from './customer/merchant-food-list/merchant-food-list/merchant-food-list.component';
 import { CartComponent } from './customer/cart/cart/cart.component';
 import { OrderDetailsComponent } from './customer/order-details/order-details/order-details.component';
+import { MerchantOrdersComponent } from './merchant-home/merchant-orders/merchant-orders.component';
+import { CustomerOrdersComponent } from './customer/customer-orders/customer-orders.component';
+import { SearchResultComponent } from './customer/search-result/search-result.component';
+import { FilterByCuisineComponent } from './customer/filter-by-cuisine/filter-by-cuisine.component';
+import { FilterByCuisine1Component } from './customer/filter-by-cuisine1/filter-by-cuisine1.component';
+import { CustomerProfileComponent } from './customer/customer-profile/customer-profile.component';
+import { CustomerChangeAddressComponent } from './customer/customer-change-address/customer-change-address.component';
+import { CustomerChangeEmailComponent } from './customer/customer-change-email/customer-change-email.component';
+import { CustomerChangePasswordComponent } from './customer/customer-change-password/customer-change-password.component';
+import { SearchResult1Component } from './customer/search-result1/search-result1.component';
+import { MerchantProfileComponent } from './merchant-home/merchant-profile/merchant-profile.component';
+import { MerchantChangeEmailComponent } from './merchant-home/merchant-change-email/merchant-change-email.component';
+import { MerchantChangePasswordComponent } from './merchant-home/merchant-change-password/merchant-change-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
     routingComponents,
     MerchantComponent,
     MerchantHomeComponent,
@@ -31,7 +42,20 @@ import { OrderDetailsComponent } from './customer/order-details/order-details/or
     CustomerLocationComponent,
     MerchantFoodListComponent,
     CartComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    MerchantOrdersComponent,
+    CustomerOrdersComponent,
+    SearchResultComponent,
+    FilterByCuisineComponent,
+    FilterByCuisine1Component,
+    CustomerProfileComponent,
+    CustomerChangeAddressComponent,
+    CustomerChangeEmailComponent,
+    CustomerChangePasswordComponent,
+    SearchResult1Component,
+    MerchantProfileComponent,
+    MerchantChangeEmailComponent,
+    MerchantChangePasswordComponent
   ],
   imports: [
     BrowserModule,

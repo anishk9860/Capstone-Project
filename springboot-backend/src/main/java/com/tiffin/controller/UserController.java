@@ -79,6 +79,7 @@ public class UserController {
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 		System.out.println(userDetails);
+		System.out.println(userDetails.getLastName());
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
@@ -106,7 +107,8 @@ public class UserController {
 					 userDetails.getId(), 
 					 userDetails.getEmail(), 
 					 roles,
-					 userDetails.getFirstName(), 
+					 userDetails.getFirstName(),
+					 userDetails.getLastName(),
 					 userDetails.getEntityName(), 
 					 location,
 					 merchant,
@@ -120,6 +122,7 @@ public class UserController {
 					 userDetails.getEmail(), 
 					 roles,
 					 userDetails.getFirstName(), 
+					 userDetails.getLastName(),
 					 userDetails.getEntityName(), 
 					 location,
 					 merchant,

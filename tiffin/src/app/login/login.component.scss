@@ -3,15 +3,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 200px 100px;
+    margin: 50px 100px;
     height: 500px;
     background-color: rgb(168, 187, 215);
     font-family: Roboto;
 }
 
 .heading {
-    width: 300px;
+    width: 900px;
     height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Roboto;
+    margin: 50px 300px;
 }
 
 .form-group {

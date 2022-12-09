@@ -14,6 +14,7 @@ public class JwtResponse {
 	private Long id;
 	private String email;
 	private String firstName;
+	private String lastName;
 	private List<String> roles;
 	private String entityName;
 	private Location location;
@@ -24,25 +25,27 @@ public class JwtResponse {
 	private List<Merchant> merchantList;
 	
 	public JwtResponse(String accessToken, Long id, String email, List<String> roles, String firstName, 
-			String entityName, Location location, Merchant merchant, UserInformation userInfo) {
+			String lastName, String entityName, Location location, Merchant merchant, UserInformation userInfo) {
 		this.token = accessToken;
 		this.id = id;
 		this.email = email;
 		this.roles = roles;
 		this.firstName = firstName;
+		this.lastName = lastName;
 		this.entityName = entityName;
 		this.location = location;
 		this.merchant = merchant;
 		this.userInfo = userInfo;
 	}
 	public JwtResponse(String accessToken, Long id, String email, List<String> roles, String firstName, 
-			String entityName, Location location, Merchant merchant, UserInformation userInfo, 
+			String lastName, String entityName, Location location, Merchant merchant, UserInformation userInfo, 
 			List<Item> merchantFoodItemList, List<Item> customerFoodItemList) {
 		this.token = accessToken;
 		this.id = id;
 		this.email = email;
 		this.roles = roles;
 		this.firstName = firstName;
+		this.lastName = lastName;
 		this.entityName = entityName;
 		this.location = location;
 		this.merchant = merchant;
@@ -52,13 +55,14 @@ public class JwtResponse {
 	}
 	
 	public JwtResponse(String accessToken, Long id, String email, List<String> roles, String firstName, 
-			String entityName, Location location, Merchant merchant, UserInformation userInfo, 
+			String lastName, String entityName, Location location, Merchant merchant, UserInformation userInfo, 
 			List<Item> merchantFoodItemList, List<Item> customerFoodItemList, List<Merchant> merchantList) {
 		this.token = accessToken;
 		this.id = id;
 		this.email = email;
 		this.roles = roles;
 		this.firstName = firstName;
+		this.lastName = lastName;
 		this.entityName = entityName;
 		this.location = location;
 		this.merchant = merchant;
@@ -76,6 +80,12 @@ public class JwtResponse {
 		this.firstName = firstName;
 	}
 
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	public String getAccessToken() {
 		return token;
 	}

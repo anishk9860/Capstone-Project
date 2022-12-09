@@ -1,6 +1,6 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+// import { ThisReceiver } from '@angular/compiler';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/services/login/login.service';
 import { TokenStorageService } from 'src/services/token-storage/token-storage.service';
@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   loginData: any = null;
 
   isLoggedIn = false;
-  // isLoginFailed = false;
   errorMessage = '';
   userType: string = '';
 
@@ -27,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('loginForm') form!: NgForm;
 
-  loginUser() {
+  loginUser() {;
     const userLoginDetails = {
       email : this.form.value['email'],
       password : this.form.value['password']
@@ -54,6 +53,7 @@ export class LoginComponent implements OnInit {
           delete(res.userInfo);
           delete(res.customerFoodItemList);
           delete(res.merchantFoodItemList);
+          console.log(res);
           this.tokenStorage.saveUser(res);
           console.log(this.tokenStorage.getUserLocation());
           this.userType = this.tokenStorage.getUser().roles[0];
@@ -80,9 +80,9 @@ export class LoginComponent implements OnInit {
             }
           }
           
-        } else {
-          alert('Invalid username/password');
-        }
+        } 
+      }, (err) => {
+        alert("Invalid email/password");
       });
   }
 

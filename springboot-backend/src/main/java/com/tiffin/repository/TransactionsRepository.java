@@ -12,4 +12,8 @@ public interface TransactionsRepository extends JpaRepository<Transactions, Long
 	ArrayList<Transactions> findAllByMerchantIdAndCustomerIdAndTransactionDate(long merchantId, 
 			long customerId, LocalDate transactionDate);
 	
+	ArrayList<Transactions> findAllByMerchantId(long merchantId);
+	
+	ArrayList<Transactions> findAllByCustomerId(long customerId);
+	
 }

@@ -7,6 +7,47 @@ ul{
     padding: 0;
 }
 
+.top-bar {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+.left-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.right-section {
+    flex: 2;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cart-button {
+    height: 30px;
+    background-color: rgb(240, 240, 240);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    border-radius: 2px;
+    font-weight: bold;
+    margin-left: 50px;
+}
+
+.cart-button:hover{
+    cursor: pointer;
+}
+
 ul li a{
     height: 20rem;
     width: 20rem;
@@ -23,19 +64,24 @@ ul li a{
     margin-left: 5px;
 }
 
+.edit-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 .delete-button {
     margin-left: 210px;
+}
+
+.delete-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
 }
 
 ul li a img{
     // height: 250px;
     width: 20rem;
     height: 16rem;
-}
-
-li a:hover{
-    opacity: 0.8;
-    cursor: pointer;
 }
 
 .tags{

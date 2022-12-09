@@ -1,3 +1,13 @@
+<div class="top-bar">
+    <div class="left-section">
+        <button class="additem-button" (click)="goToCustomerHome()">Home</button>
+    </div>
+    <div class="right-section">
+        <button class="additem-button">Cart<span> ({{cartItemCount}}) </span></button>
+        <button class="additem-button" (click)="goToMyOrders()">My Orders</button>
+        <button class="additem-button" (click)="goToMyProfile()">My Profile</button>
+    </div>
+</div>
 <div class="container-fluid">
     <div class="heading">
         <h2>Items in your cart</h2>

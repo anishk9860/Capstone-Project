@@ -60,6 +60,8 @@ export class SignupComponent implements OnInit {
           alert(`Congratulations! Your account has been created.`);
           this.router.navigate(['login']);
         }
+    }, (err) => {
+      alert(err.error.message);
     })
     
   }

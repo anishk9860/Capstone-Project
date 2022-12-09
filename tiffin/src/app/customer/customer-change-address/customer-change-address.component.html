@@ -1,0 +1,57 @@
+<div class="top-bar">
+    <div class="left-section">
+        <button (click)="goToHomePage()" class="cart-button">Home</button>
+    </div>
+    <div class="right-section">
+        <button (click)="goToCart()" class="cart-button">Cart<span> ({{cartItemCount}}) </span></button>
+        <button (click)="goToMyOrders()" class="cart-button">My Orders</button>
+        <button (click)="goToMyProfile()" class="cart-button">My Profile</button>
+    </div>
+</div>
+<div class="heading">
+    <h2>Hello {{customerName}}</h2>
+    <div>
+        <h4>Please enter your updated address details below:</h4>
+    </div>
+    
+</div>
+<div class="container-fluid">
+    <div>
+        <form (ngSubmit)="updateLocationDetails()" #locationForm="ngForm">
+            <div class="form-group">
+                <label for="city">Select your city:</label>
+                <select class="form-control" id="city" name="cityName" ngModel required>
+                    <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+                  </select>
+            </div>
+            <div>Address Details:</div>
+            <div class="form-group">
+                <label for="streetName">Name of the street:</label>
+                <input type="text" class="form-control" id="streetName" placeholder="{{customerInfo.streetName}}" 
+                name="streetName" ngModel required #streetAddress="ngModel">
+                <p *ngIf="streetAddress.invalid && streetAddress.touched" 
+                class="error-message">Please enter a your street address
+            </p>
+            </div>
+            <div class="form-group">
+                <label for="aptNo">Apartment No: (Optional)</label>
+                <input type="text" class="form-control" id="aptNo" placeholder="{{customerInfo.aptNo}}" 
+                name="aptNo" ngModel #aptNo="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="zipCode">Zipcode:</label>
+                <input type="text" class="form-control" id="zipCode" placeholder="{{customerLocation.zipCode}}" 
+                name="zipCode" ngModel required #zip="ngModel">
+                <p *ngIf="zip.invalid && zip.touched" class="error-message">
+                    Please enter a your zipcode
+                </p>
+            </div>
+            <button class="signin-button" type="submit" [disabled]="!locationForm.valid">
+                Confirm and Save
+            </button>
+            <button class="signin-button" (click)="goToMyProfile()">
+                Cancel
+            </button>
+        </form>
+    </div>
+</div>

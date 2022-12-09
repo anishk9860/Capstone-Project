@@ -17,6 +17,8 @@ export class MerchantFoodListComponent implements OnInit {
   cart : any = [];
   cartItemCount : number = 0;
   currentMerchantIdInCart : number = 0;
+  cuisines = ['North Indian', 'South Indian', 'Bengali', 'Chinese', 
+  'Japanese', 'Middle Eastern', 'European', 'Mexican'];
 
   constructor(private tokenStorage: TokenStorageService, 
     private customerService: CustomerService, private router: Router, 
@@ -24,9 +26,9 @@ export class MerchantFoodListComponent implements OnInit {
 
   ngOnInit(): void {
     this.merchant = this.tokenStorage.getMerchantInfo();
-    // console.log(this.merchant);
+    console.log(this.merchant);
     const items = this.tokenStorage.getFoodItems();
-    // console.log(items);
+    console.log(items);
     if(items !== null){
       for(let i=0; i<items.length; i++){
         if(items[i].merchantId === this.merchant.merchantId){
@@ -82,7 +84,7 @@ export class MerchantFoodListComponent implements OnInit {
             console.log(res[i].itemCount);
           }
           this.cartItemCount = totalItems;
-          console.log(this.cartItemCount);
+          alert("Item successfully added to cart!");
         })  
     } else {
       alert("You have items from a different merchant in the cart. Please empty the cart to order items from this merchant");
@@ -92,6 +94,18 @@ export class MerchantFoodListComponent implements OnInit {
 
   goToCart(){
     this.router.navigate(['customer-cart']);
+  }
+
+  goToMyOrders() {
+    this.router.navigate(['customer-orders']);
+  }
+
+  goToMyProfile() {
+    this.router.navigate(['customer-profile']);
+  }
+
+  goToHomePage() {
+    this.router.navigate(['customer-home']);
   }
   
 }

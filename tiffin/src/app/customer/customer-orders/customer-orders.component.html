@@ -1,0 +1,55 @@
+<div class="top-bar">
+    <div class="left-section">
+        <button class="additem-button" (click)="goToCustomerHome()">Home</button>
+    </div>
+    <div class="right-section">
+        <button (click)="goToCart()" class="additem-button">Cart<span> ({{cartItemCount}}) </span></button>
+        <button class="additem-button">My Orders</button>
+        <button class="additem-button" (click)="goToMyAccount()">My Profile</button>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="heading">
+        <h2>Order Details:</h2>
+    </div>
+    <div *ngIf="orderListLength === 0">
+        <p>There are no orders to show.</p>
+    </div>
+    <table *ngIf="orderListLength !== 0">
+        <tr>
+            <th>S.No.</th>
+            <th>Merchant Name</th>
+            <th>Merchant Address</th>
+            <th>Merchant Email</th>
+            <th>Items Ordered (Quantity)</th>
+            <th>Delivery Type</th>
+            <th>Delivery Date</th>
+            <th>Ordered On</th>
+            <th>Amount Paid</th>
+            <th>Order Status</th>
+        </tr>
+
+        <tr class="row" *ngFor="let order of orderDetailsList">
+            <td>{{order.serialNo}}</td>
+            <td>{{order.merchantName}}</td>
+            <td class="addressWidth">
+                <div>{{order.merchantAddress.streetName}}</div>
+                <div>{{order.merchantAddress.city}}, {{order.merchantAddress.country}}</div>
+                <div>{{order.merchantAddress.zipCode}}</div>
+            </td>
+            <td>{{order.merchantEmail}}</td>
+            <td>
+                <div *ngFor="let item of order.itemsOrdered">
+                    {{item.itemName}} ({{item.quantity}})
+                </div>
+            </td>
+            <td>{{order.deliveryType}}</td>
+            <td>{{order.deliveryDate}}</td>
+            <td>{{order.orderedOn}}</td>
+            <td>CAD ${{order.amountPaid}}</td>
+            <td>{{order.orderStatus}}</td>
+        </tr>        
+    </table>
+</div>
+
+

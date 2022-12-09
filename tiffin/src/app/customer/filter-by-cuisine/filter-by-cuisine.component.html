@@ -1,0 +1,35 @@
+<div class="top-bar">
+    <div class="left-section">
+        Filter By Cuisine: {{filterBy}}
+        <select (change)="applyFilter($event)">
+            <option *ngFor="let value of filterList" [value]="value">
+                    {{value}}
+            </option>
+        </select>
+    </div>
+    <div class="right-section">
+            <button (click)="goToCart()" class="cart-button">Cart<span> ({{cartItemCount}}) </span></button>
+            <button (click)="goToMyOrders()" class="cart-button">My Orders</button>
+            <button (click)="goToMyProfile()" class="cart-button">My Profile</button>
+    </div>
+</div>
+
+<ul>
+    <li *ngFor="let merchant of merchants">
+        <a (click)="merchantClicked(merchant)">
+            <img [src]=getSanitizeUrl(merchant.merchantPic) alt="food_images" class="image">
+            <div class="content">
+                <div class="name">
+                   {{merchant.merchantName}}
+                </div>
+                <div class="rating">
+                    Rating: 4.5/5
+                </div>
+                <div>
+                    {{cuisines[(merchant.cuisineId)-1]}}
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
+

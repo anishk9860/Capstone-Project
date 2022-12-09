@@ -1,0 +1,38 @@
+<div class="top-bar">
+    <div class="left-section">
+        <button (click)="goToHomePage()" class="cart-button">Home</button>
+    </div>
+    <div class="right-section">
+        <button (click)="goToCart()" class="cart-button">Cart<span> ({{cartItemCount}}) </span></button>
+        <button (click)="goToMyOrders()" class="cart-button">My Orders</button>
+        <button (click)="goToMyProfile()" class="cart-button">My Profile</button>
+    </div>
+</div>
+<div class="search-result"><strong>Your search results:</strong> 
+    <span *ngIf="foodItemsLength === 0">
+        No items matched your search!
+    </span>
+</div>
+<ul *ngIf="foodItemsLength !== 0">
+    <li *ngFor="let foodItem of foodItems">
+        <a>
+            <!-- <img src="{{foodItem.itemPic}}" alt="food_images"> -->
+            <img [src]=getSanitizeUrl(foodItem.itemPic) alt="food_images" class="image">
+            <div class="content">
+                <div class="name">
+                    {{foodItem.merchantName}}
+                 </div>
+                <div class="name">
+                   {{foodItem.itemName}}
+                   <span>(Cuisine: {{cuisines[(foodItem.cuisineId)-1]}})</span>
+                </div>
+                <div class="rating">
+                    CAD ${{foodItem.itemCost}}
+                </div>
+                <div>
+                    <button class="addToCart-button" (click)="addItemToCart(foodItem)">Add To Cart</button>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>

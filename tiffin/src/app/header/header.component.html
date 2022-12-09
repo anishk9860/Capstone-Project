@@ -1,15 +1,12 @@
 <div class="header">
     <div class="left-section">
-        <!-- <div routerLink="/"  class="tiffin-logo">
-            Tiffin
-        </div> -->
         <div (click)="goToHomePage()" class="tiffin-logo">
             Tiffin
         </div>
     </div>
-    <div class="middle-section">
-        <input class="search-bar" type="text" placeholder="Search">
-        <button class="search-button">
+    <div class="middle-section" *ngIf="isLoggedIn">
+        <input class="search-bar" type="text" placeholder="Search by food" [(ngModel)]="searchText">
+        <button class="search-button" (click)="goToSearchPage(searchText)">
             <img 
             class="search-icon"
             src="assets/header-icons/search.svg">

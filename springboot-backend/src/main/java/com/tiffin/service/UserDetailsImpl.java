@@ -31,6 +31,8 @@ public class UserDetailsImpl implements UserDetails{
 	private String email;
 	
 	private String firstName;
+	
+	private String lastName;
 
 	@JsonIgnore
 	private String password;
@@ -44,27 +46,15 @@ public class UserDetailsImpl implements UserDetails{
 	UserRepository userRepository;
 	
 	public UserDetailsImpl(Long id, String email, String password, String firstName,
-			Collection<? extends GrantedAuthority> authorities, String entityName) {
+			String lastName, Collection<? extends GrantedAuthority> authorities, String entityName) {
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
+		this.lastName = lastName;
 		this.authorities = authorities;
 		this.entityName = entityName;
 	}
-	
-//	public static UserDetailsImpl build(Users user) {
-//		List<GrantedAuthority> authorities = user.getUserTypes().stream()
-//				.map(userType -> new SimpleGrantedAuthority(userType.getName().name()))
-//				.collect(Collectors.toList());
-//
-//		return new UserDetailsImpl(
-//				user.getUserID(), 
-//				user.getEmail(),
-//				user.getPassword(), 
-//				user.getFirstName(), 
-//				authorities);
-//	}
 	
 	public static UserDetailsImpl build(Users user) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
@@ -75,26 +65,20 @@ public class UserDetailsImpl implements UserDetails{
 				user.getUserID(), 
 				user.getEmail(),
 				user.getPassword(), 
-				user.getFirstName(), 
+				user.getFirstName(),
+				user.getLastName(),
 				authorities, 
 				user.getEntityName());
 				
 	}
 	
-//	@Override
-//	public Collection<? extends GrantedAuthority> getAuthorities() {
-//		return authorities;
-//	}
-	
-	
-	
 	public String getFirstName() {
 		return firstName;
 	}
-
-//	public SimpleGrantedAuthority getAuthorities() {
-//		return authorities;
-//	}
+	
+	public String getLastName() {
+		return lastName;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -116,6 +100,10 @@ public class UserDetailsImpl implements UserDetails{
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public Long getId() {
@@ -168,45 +156,9 @@ public class UserDetailsImpl implements UserDetails{
 
 	@Override
 	public String toString() {
-		return "UserDetailsImpl [id=" + id + ", email=" + email + ", firstName=" + firstName + ", authorities="
+		return "UserDetailsImpl [id=" + id + ", email=" + email + ", firstName=" + firstName + ", "
+				+ "lastName=" + lastName + ", authorities="
 				+ authorities + "]";
 	}
-	
-	
-	
-//	public boolean authenticate(String email, String password) {
-//		Users user = userRepository.findByEmail(email);
-//		if(user == null) return false;
-//		if(this.passwordEncoder.matches(password, user.getPassword())) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
-	
-//	public Users save(Users newUser) {
-//		
-//		Users user = userRepository.findByEmail(newUser.getEmail());
-//		if(user != null) {
-//			return null;
-//		}
-//		newUser.setAccountCreationDate(LocalDate.now());
-//		
-//		String encodedPassword = this.passwordEncoder.encode(newUser.getPassword());
-//		newUser.setPassword(encodedPassword);
-//		return this.userRepository.save(newUser);
-//	}
-//	
-//	public Users authenticate(Users userLoginDetails) {
-//		Users user = userRepository.findByEmail(userLoginDetails.getEmail());
-//		if(user == null) return null;
-//		if(this.passwordEncoder.matches(userLoginDetails.getPassword(), user.getPassword())) {
-//			return user;
-//		} else {
-//			return null;
-//		}
-//	}
-
-
 	
 }

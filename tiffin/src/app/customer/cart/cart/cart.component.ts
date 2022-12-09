@@ -56,8 +56,16 @@ export class CartComponent implements OnInit {
       this.router.navigate(['customer-home']);
     }
 
+    goToMyOrders() {
+      this.router.navigate(['customer-orders']);
+    }
+
     goToOrderDetails(){
       this.router.navigate(['order-details']);
+    }
+
+    goToMyProfile() {
+      this.router.navigate(['customer-profile']);
     }
 
     quantitySelected(item: any){
@@ -81,9 +89,7 @@ export class CartComponent implements OnInit {
             window.location.reload();
           })
       }
-      
     }
-
   }
 
 

@@ -14,6 +14,7 @@ export class OrderDetailsComponent implements OnInit {
   totalCost = 0;
   deliveryCost !: number;
   selectedDeliveryChoice : string = 'Pick Up';
+  cartItemCount : number = 0;
 
   dateOfDelivery !: any;
   minDate !: string;
@@ -62,6 +63,20 @@ export class OrderDetailsComponent implements OnInit {
         
       })
 
+      if(items !== null){
+        let totalItems : number = 0;
+        let userId = this.tokenStorage.getUser().id;
+        this.customerService
+          .getCartItems(userId)
+          .subscribe((res:any) => {
+            for(let i=0; i<res.length; i++){
+              totalItems = totalItems + res[i].itemCount;
+              console.log(res[i].itemCount);
+            }
+            this.cartItemCount = totalItems;
+          })
+      }
+
       if(this.currentDay < 9){
         this.finalDay = "0" + (this.currentDay + 1);
       } else {
@@ -98,8 +113,16 @@ export class OrderDetailsComponent implements OnInit {
     this.router.navigate(['customer-cart']);
   }
 
+  goToMyOrders() {
+    this.router.navigate(['customer-orders']);
+  }
+
   goToCustomerHome() {
     this.router.navigate(['customer-home'])
+  }
+
+  goToMyProfile() {
+    this.router.navigate(['customer-profile']);
   }
 
   confirmAndPay() {
@@ -116,7 +139,8 @@ export class OrderDetailsComponent implements OnInit {
     this.customerService
     .postTransaction(orderDetails)
     .subscribe((res:any) => {
-      console.log(res);
+      alert("Order Successful!")
+      this.router.navigate(['customer-orders']);
     })
   }
 

@@ -1,12 +1,16 @@
 <div class="top-bar">
     <div class="left-section">
-        {{merchant.entityName}}
+        <button (click)="goToHomePage()" class="cart-button">Home</button>
     </div>
     <div class="right-section">
             <button (click)="goToCart()" class="cart-button">Cart<span> ({{cartItemCount}}) </span></button>
+            <button class="cart-button" (click)="goToMyOrders()">My Orders</button>
+            <button class="cart-button" (click)="goToMyProfile()">My Profile</button>
     </div>
 </div>
-
+<div class="search-result">
+    <strong>{{merchant.merchantName}}'s Menu</strong> 
+</div>
 <ul>
     <li *ngFor="let foodItem of foodItems">
         <a>
@@ -14,14 +18,15 @@
             <img [src]=getSanitizeUrl(foodItem.itemPic) alt="food_images" class="image">
             <div class="content">
                 <div class="name">
+                    {{merchant.merchantName}}
+                 </div>
+                <div class="name">
                    {{foodItem.itemName}}
+                   <span>(Cuisine: {{cuisines[(merchant.cuisineId)-1]}})</span>
                 </div>
                 <div class="rating">
                     CAD ${{foodItem.itemCost}}
                 </div>
-                <!-- <div>
-                    {{cuisines[(merchant.cuisineId)-1]}}
-                </div> -->
                 <div>
                     <button class="addToCart-button" (click)="addItemToCart(foodItem)">Add To Cart</button>
                 </div>

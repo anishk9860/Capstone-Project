@@ -23,7 +23,7 @@ export class AddFooditemComponent implements OnInit {
     private merchantService: MerchantService, private router: Router) { }
 
   ngOnInit(): void {
-    this.merchantName = this.tokenStorage.getUser().entityName;
+    this.merchantName = this.tokenStorage.getUser().firstName;
   }
 
   onSelectFile(event: any){
@@ -50,6 +50,7 @@ export class AddFooditemComponent implements OnInit {
     .saveFoodItemDetails(formData)
     .subscribe((res: any) => {
       this.tokenStorage.saveMerchantFoodItems(res);
+      alert("Item successfully added");
       this.router.navigate(['merchant-home']);
     });
   }

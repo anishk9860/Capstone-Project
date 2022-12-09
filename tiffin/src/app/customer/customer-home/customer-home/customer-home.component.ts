@@ -12,29 +12,31 @@ import { TokenStorageService } from 'src/services/token-storage/token-storage.se
 })
 export class CustomerHomeComponent implements OnInit {
 
-  merchants !: [any]
+  merchants !: any[]
   cart !: [any]
   cuisines = ['North Indian', 'South Indian', 'Bengali', 'Chinese', 
   'Japanese', 'Middle Eastern', 'European', 'Mexican'];
   cartItemCount : number = 0;
+  filterBy : string = 'All';
+  filterList = ['', 'All', 'North Indian', 'South Indian', 'Bengali', 'Chinese', 
+  'Japanese', 'Middle Eastern', 'European', 'Mexican'];
 
   constructor(private tokenStorage: TokenStorageService, 
     private customerService: CustomerService, private router: Router, 
     private sanitizer: DomSanitizer, private merchantService: MerchantService) { }
 
   ngOnInit(): void {
-    // console.log(this.tokenStorage.getUser());
-    // console.log(this.tokenStorage.getUserInfo());
-    // console.log(window.sessionStorage);
     const merchantList = this.tokenStorage.getMerchantListByLocation();
     if(merchantList !== null) {
       for(let i=0; i<merchantList.length; i++){
         if(merchantList[i].merchantPic !== null){
-          merchantList[i].merchantPic = this.merchantService.createImageFromBlob(merchantList[i].merchantPic);
+          merchantList[i].merchantPic = this.merchantService
+            .createImageFromBlob(merchantList[i].merchantPic);
         }
       }
+      this.merchants = merchantList;
     }
-    this.merchants = merchantList;
+    
     const items = this.tokenStorage.getFoodItems();
     if(items !== null){
       let totalItems : number = 0;
@@ -48,6 +50,17 @@ export class CustomerHomeComponent implements OnInit {
           }
           this.cartItemCount = totalItems;
         })
+    }
+
+    console.log(this.merchants);
+  }
+
+  applyFilter(event:any) {
+    if(event.target.value === 'All') {
+      return;
+    } else {
+      this.customerService.setSelectedFilter(event.target.value);
+      this.router.navigate(['filter-by-cuisine']);
     }
   }
 
@@ -64,9 +77,12 @@ export class CustomerHomeComponent implements OnInit {
     this.router.navigate(['customer-cart']);
   }
 
-  // addItemToCart(foodItem : any){
-  //   this.cart.push(foodItem);
-  //   console.log(this.cart);
-  // }
+  goToMyOrders(){
+    this.router.navigate(['customer-orders']);
+  }
+
+  goToMyProfile() {
+    this.router.navigate(['customer-profile']);
+  }
 
 }

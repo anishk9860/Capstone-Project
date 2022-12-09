@@ -2,7 +2,9 @@ package com.tiffin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,9 @@ import com.tiffin.model.Cuisine;
 import com.tiffin.model.Item;
 import com.tiffin.model.Location;
 import com.tiffin.model.Merchant;
+import com.tiffin.model.OrderStatus;
+import com.tiffin.model.TransactionItems;
+import com.tiffin.model.Transactions;
 import com.tiffin.model.UserInformation;
 import com.tiffin.model.Users;
 import com.tiffin.payload.request.AddFoodItemRequest;
@@ -31,6 +36,9 @@ import com.tiffin.repository.CuisineRepository;
 import com.tiffin.repository.ItemRepository;
 import com.tiffin.repository.LocationRepository;
 import com.tiffin.repository.MerchantRepository;
+import com.tiffin.repository.OrderStatusRepository;
+import com.tiffin.repository.TransactionItemsRepository;
+import com.tiffin.repository.TransactionsRepository;
 import com.tiffin.repository.UserInformationRepository;
 import com.tiffin.repository.UserRepository;
 
@@ -59,6 +67,15 @@ public class MerchantController {
 	
 	@Autowired
 	MerchantRepository merchantRepository;
+	
+	@Autowired
+	TransactionsRepository transactionsRepository;
+	
+	@Autowired
+	TransactionItemsRepository transactionItemsRepository;
+	
+	@Autowired
+	OrderStatusRepository orderStatusRepository;
 	
 	
 	@PostMapping("/save-location")
@@ -177,29 +194,67 @@ public class MerchantController {
 		return ResponseEntity.ok(itemList);
 	}
 	
-//	@PostMapping("/edit-fooditem")
-//	public ResponseEntity<?> editFoodItem(@RequestBody EditFoodItemRequest request) {
-//		
-//		Cuisine cuisine = cuisineRepository.findByCuisineName(request.getCuisineName());
-//		Location location = locationRepository.findByUserId(request.getUserId());
-//		Item item = new Item();
-//		
-//		System.out.println(request);
-//		
-//		item.setCityLocationId(location.getCityLocationId());
-//		item.setMerchantId(request.getMerchantId());
-//		item.setItemName(request.getItemName());
-//		item.setItemId(request.getItemId());
-//		// Set item picture here
-//		item.setCuisineId(cuisine.getCuisineId());
-//		item.setItemCost(request.getItemCost());
-//		
-//		itemRepository.save(item);
-//		
-//		List<Item> itemList = new ArrayList<Item>();
-//		itemList = itemRepository.findAllItemsByMerchantId(request.getMerchantId());
-//		
-//		return ResponseEntity.ok(itemList);
-//	}
+	@PostMapping("/get-merchant-transactions")
+	public ResponseEntity<?> getAllMerchantTransactions(@RequestBody long merchantId) {
+		
+		ArrayList<Transactions> transactionList = transactionsRepository.findAllByMerchantId(merchantId);
+		
+		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String, Object>>();
+		
+		
+		for(int i=0; i<transactionList.size(); i++) {
+			
+			HashMap<String,Object> result = new HashMap<String, Object>();
+			result.put("transactionId", transactionList.get(i).getTransactionId());
+			result.put("serialNo", (i+1));
+			
+			Users customer = userRepository.getById(transactionList.get(i).getCustomerId());
+			result.put("customerName", customer.getFirstName() + " " + customer.getLastName());
+			result.put("customerEmail", customer.getEmail());
+			
+			UserInformation customerInfo = userInformationRepository.findByUserId(transactionList.get(i).getCustomerId());
+			Location customerLocation = locationRepository.findByUserId(transactionList.get(i).getCustomerId());
+			CityLocation customerCity = cityLocationRepository.getById(customerLocation.getCityLocationId());
+			
+			Map<String,String> address= new HashMap<String, String>();
+			address.put("streetName", customerInfo.getStreetName());
+			address.put("city", customerCity.getCityName());
+			address.put("country", customerCity.getCountryCode());
+			address.put("zipCode", customerLocation.getZipCode());
+			result.put("customerAddress", address);
+			
+			ArrayList<TransactionItems> transactionItems = transactionItemsRepository
+					.findAllByTransactionId(transactionList.get(i).getTransactionId());
+			result.put("itemsOrdered", transactionItems);
+			
+			result.put("deliveryType", transactionList.get(i).getDeliveryType());
+			result.put("deliveryDate", transactionList.get(i).getDeliveryDate());
+			result.put("orderedOn", transactionList.get(i).getTransactionDate());
+			result.put("amountPaid", transactionList.get(i).getTotalCost());
+			
+			OrderStatus orderStatus = orderStatusRepository.getById(transactionList.get(i).getOrderStatusId());
+			result.put("orderStatus", orderStatus.getOrderStatusName());
+			
+			resultList.add(result);
+		}
+		
+		return ResponseEntity.ok(resultList);
+	}
+	
+	@PostMapping("/update-order-status")
+	public ResponseEntity<?> updateOrderStatus(@RequestBody HashMap<String,Object> request) {
+		
+		String orderStatusName = (String) request.get("statusSelected");
+		long transactionId = ((Number)request.get("transactionId")).longValue();
+		
+		Transactions transaction = transactionsRepository.getById(transactionId);
+		OrderStatus orderStatus = orderStatusRepository.findByOrderStatusName(orderStatusName);
+		
+		transaction.setOrderStatusId(orderStatus.getOrderStatusId());
+		transactionsRepository.save(transaction);
+		
+		return ResponseEntity.ok(request);
+	}
+	
 		
 }

@@ -15,4 +15,5 @@ public interface OrderItemsRepository extends JpaRepository<OrderItems, Integer>
 	List<OrderItems> findAllByUserIdAndOrderStatusId(long userId, int orderStatusId);
 	
 	void deleteByItemIdAndUserId(long itemId, long userId);
+	
 }

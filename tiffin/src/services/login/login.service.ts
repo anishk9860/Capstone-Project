@@ -19,8 +19,4 @@ export class LoginService {
     return this.httpClient.post<any>(`${this.baseURL}`, userLoginDetails, this.httpOptions);
   }
 
-  // authenticateLogin(email: String, password: String): Observable<boolean> {
-  //   return this.httpClient.get<boolean>(`${this.baseURL}/${email}/${password}`);
-  // }
-
 }

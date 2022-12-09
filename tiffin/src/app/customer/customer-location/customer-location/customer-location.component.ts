@@ -39,12 +39,12 @@ export class CustomerLocationComponent implements OnInit {
       .saveCustomerDetails(customerDetails)
       .subscribe((res: any) => {
         console.log(res);
-        // this.tokenStorage.saveUserLocation(res);
         this.tokenStorage.saveUserLocation(res.location);
         this.tokenStorage.saveUserInfo(res.userInformation);
-        this.tokenStorage.saveMerchantInfo(res.merchants);
+        this.tokenStorage.saveMerchantListByLocation(res.merchants);
         this.tokenStorage.saveFoodItems(res.items);
         this.router.navigate(['customer-home']);
+        setTimeout(() => location.reload(), 100);
       });
   }
 

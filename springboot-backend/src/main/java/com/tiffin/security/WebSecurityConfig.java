@@ -64,20 +64,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
-	
-//	private final BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-//	public WebSecurityConfig(UserDetailsService userDetailsService) {
-//		this.userDetailsService = new UserService();
-//		this.userDetailsService = userDetailsService;
-//		this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//	}
-	
-
-
-	
-	
-	
-	
+		
 	
 }

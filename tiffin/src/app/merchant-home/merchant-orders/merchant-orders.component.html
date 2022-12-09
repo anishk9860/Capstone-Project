@@ -1,0 +1,65 @@
+<div class="option-buttons">
+    <button class="additem-button" (click)="goToMerchantHome()">Home</button>
+    <button class="additem-button">My Orders</button>
+</div>
+<div class="container-fluid">
+    <div class="heading">
+        <h2>Order Details:</h2>
+    </div>
+    <div *ngIf="orderListLength === 0">
+        <p>There are no orders to show.</p>
+    </div>
+    <table *ngIf="orderListLength !== 0">
+        <tr>
+            <th>S.No.</th>
+            <th>Customer Name</th>
+            <th>Customer Address</th>
+            <th>Customer Email</th>
+            <th>Items Ordered (Quantity)</th>
+            <th>Delivery Type</th>
+            <th>Delivery Date</th>
+            <th>Ordered On</th>
+            <th>Amount Paid</th>
+            <th>Current Order Status</th>
+            <th>Update Status</th>
+        </tr>
+
+        <tr class="row" *ngFor="let order of orderDetailsList">
+            <td>{{order.serialNo}}</td>
+            <td>{{order.customerName}}</td>
+            <td class="addressWidth">
+                <div>{{order.customerAddress.streetName}}</div>
+                <div>{{order.customerAddress.city}}, {{order.customerAddress.country}}</div>
+                <div>{{order.customerAddress.zipCode}}</div>
+            </td>
+            <td>{{order.customerEmail}}</td>
+            <td>
+                <div *ngFor="let item of order.itemsOrdered">
+                    {{item.itemName}} ({{item.quantity}})
+                </div>
+            </td>
+            <td>{{order.deliveryType}}</td>
+            <td>{{order.deliveryDate}}</td>
+            <td>{{order.orderedOn}}</td>
+            <td>CAD ${{order.amountPaid}}</td>
+            <td>{{order.orderStatus}}</td>
+            <td *ngIf="order.deliveryType === 'Pick Up'">
+                <select (click)="getTransaction(order)" (change)="updateOrderStatus($event)">
+                    <option *ngFor="let status of pickUpOptions" [value]="status" 
+                        [selected]="status === order.orderStatus ? 'selected' : null">
+                            {{status}}
+                    </option>
+                </select>
+            </td>
+            <td *ngIf="order.deliveryType !== 'Pick Up'">
+                <select (click)="getTransaction(order)" (change)="updateOrderStatus($event)">
+                    <option *ngFor="let status of deliveryOptions" [value]="status" 
+                    [selected]="status === order.orderStatus ? 'selected' : null">
+                            {{status}}
+                    </option>
+                </select>
+            </td>
+        </tr>        
+    </table>
+</div>
+
